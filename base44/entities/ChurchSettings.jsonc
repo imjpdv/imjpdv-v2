@@ -1,0 +1,140 @@
+{
+  "name": "ChurchSettings",
+  "type": "object",
+  "properties": {
+    "church_name": {
+      "type": "string",
+      "description": "Nome oficial da igreja"
+    },
+    "address": {
+      "type": "string",
+      "description": "Endere\u00e7o completo"
+    },
+    "pastors": {
+      "type": "string",
+      "description": "Nomes dos pastores"
+    },
+    "logo_url": {
+      "type": "string",
+      "description": "URL do logo da igreja"
+    },
+    "texto_institucional": {
+      "type": "string",
+      "description": "Texto b\u00edblico ou institucional exibido na p\u00e1gina inicial do membro"
+    },
+    "imagem_institucional": {
+      "type": "string",
+      "description": "URL da imagem institucional exibida na p\u00e1gina inicial do membro"
+    },
+    "link_pagamento_online": {
+      "type": "string",
+      "description": "Link global de pagamento online exibido na p\u00e1gina do membro"
+    },
+    "texto_pix": {
+      "type": "string",
+      "description": "Texto HTML de instru\u00e7\u00f5es exibido na p\u00e1gina de Pix"
+    },
+    "imagem_pix": {
+      "type": "string",
+      "description": "URL da imagem exibida no topo da p\u00e1gina Pix"
+    },
+    "texto_link_pagamento": {
+      "type": "string",
+      "description": "Texto HTML exibido na p\u00e1gina de Link de Pagamento"
+    },
+    "imagem_link_pagamento": {
+      "type": "string",
+      "description": "URL da imagem exibida no topo da p\u00e1gina Link de Pagamento"
+    },
+    "texto_bancario": {
+      "type": "string",
+      "description": "Texto HTML exibido na p\u00e1gina de Informa\u00e7\u00f5es Banc\u00e1rias"
+    },
+    "imagem_bancario": {
+      "type": "string",
+      "description": "URL da imagem exibida no topo da p\u00e1gina Informa\u00e7\u00f5es Banc\u00e1rias"
+    },
+    "texto_cartao": {
+      "type": "string",
+      "description": "Texto HTML exibido na p\u00e1gina de Cart\u00e3o de Cr\u00e9dito"
+    },
+    "imagem_cartao": {
+      "type": "string",
+      "description": "URL da imagem exibida no topo da p\u00e1gina Cart\u00e3o de Cr\u00e9dito"
+    },
+    "mp_public_key": {
+      "type": "string",
+      "description": "Chave p\u00fablica do Mercado Pago (Public Key) usada para tokeniza\u00e7\u00e3o de cart\u00e3o"
+    },
+    "paginas_visiveis": {
+      "type": "object",
+      "description": "Controle de visibilidade das p\u00e1ginas para membros",
+      "properties": {
+        "minhas_contribuicoes": {
+          "type": "boolean",
+          "default": true
+        },
+        "feed": {
+          "type": "boolean",
+          "default": true
+        },
+        "contribuir": {
+          "type": "boolean",
+          "default": true
+        },
+        "contribuir_pix": {
+          "type": "boolean",
+          "default": true
+        },
+        "contribuir_cartao": {
+          "type": "boolean",
+          "default": true
+        },
+        "contribuir_bancario": {
+          "type": "boolean",
+          "default": true
+        },
+        "contribuir_link": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    },
+    "igreja_id": {
+      "type": "string",
+      "description": "ID da igreja (tenant)"
+    }
+  },
+  "required": [
+    "igreja_id"
+  ],
+  "rls": {
+    "create": {
+      "$and": [
+        {
+          "igreja_id": "{{user.igreja_id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "igreja_id": "{{user.igreja_id}}"
+    },
+    "update": {
+      "$and": [
+        {
+          "igreja_id": "{{user.igreja_id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

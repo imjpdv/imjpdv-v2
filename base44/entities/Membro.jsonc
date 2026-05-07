@@ -1,0 +1,77 @@
+{
+  "name": "Membro",
+  "type": "object",
+  "properties": {
+    "nome": {
+      "type": "string",
+      "description": "Nome completo do membro"
+    },
+    "email": {
+      "type": "string",
+      "description": "Email do membro"
+    },
+    "telefone": {
+      "type": "string",
+      "description": "Telefone de contato"
+    },
+    "perfil": {
+      "type": "string",
+      "enum": [
+        "membro",
+        "admin"
+      ],
+      "default": "membro",
+      "description": "Perfil do membro no sistema"
+    },
+    "igreja_id": {
+      "type": "string",
+      "description": "ID da igreja (tenant)"
+    }
+  },
+  "required": [
+    "nome",
+    "email",
+    "igreja_id"
+  ],
+  "rls": {
+    "create": {
+      "$and": [
+        {
+          "igreja_id": "{{user.igreja_id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "igreja_id": "{{user.igreja_id}}"
+    },
+    "update": {
+      "$and": [
+        {
+          "igreja_id": "{{user.igreja_id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$and": [
+        {
+          "igreja_id": "{{user.igreja_id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

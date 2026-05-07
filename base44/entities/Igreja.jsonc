@@ -1,0 +1,28 @@
+{
+  "name": "Igreja",
+  "type": "object",
+  "properties": {
+    "nome": {
+      "type": "string",
+      "description": "Nome da igreja"
+    }
+  },
+  "required": [
+    "nome"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "id": "{{user.igreja_id}}"
+        }
+      ]
+    },
+    "write": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

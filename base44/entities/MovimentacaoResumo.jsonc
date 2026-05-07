@@ -1,0 +1,74 @@
+{
+  "name": "MovimentacaoResumo",
+  "type": "object",
+  "properties": {
+    "igreja_id": {
+      "type": "string",
+      "description": "ID da igreja (tenant) \u2014 um registro por igreja"
+    },
+    "total_entrada": {
+      "type": "number",
+      "default": 0,
+      "description": "Soma total de todas as entradas"
+    },
+    "total_saida": {
+      "type": "number",
+      "default": 0,
+      "description": "Soma total de todas as sa\u00eddas"
+    },
+    "saldo": {
+      "type": "number",
+      "default": 0,
+      "description": "total_entrada - total_saida"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "\u00daltima vez que o resumo foi recalculado"
+    }
+  },
+  "required": [
+    "igreja_id"
+  ],
+  "rls": {
+    "read": {
+      "igreja_id": "{{user.igreja_id}}"
+    },
+    "create": {
+      "$and": [
+        {
+          "igreja_id": "{{user.igreja_id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$and": [
+        {
+          "igreja_id": "{{user.igreja_id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$and": [
+        {
+          "igreja_id": "{{user.igreja_id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

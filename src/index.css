@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* === "The Sacred Ledger" — Light, Editorial === */
+
+    /* Surfaces */
+    --background: 210 17% 98%;        /* #f8f9fa — base */
+    --foreground: 195 5% 11%;         /* #191c1d — on_surface (never 100% black) */
+
+    --card: 0 0% 100%;                /* #ffffff — cards float */
+    --card-foreground: 195 5% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 195 5% 11%;
+
+    /* Primary: Bronze/Gold */
+    --primary: 33 53% 26%;            /* #715824 */
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary: Nature Green */
+    --secondary: 129 74% 24%;         /* #106d20 */
+    --secondary-foreground: 0 0% 100%;
+
+    /* Muted surfaces */
+    --muted: 210 17% 95%;             /* surface-container-low */
+    --muted-foreground: 210 6% 48%;   /* on_surface_variant */
+
+    /* Accent = primary light tint */
+    --accent: 33 40% 93%;             /* primary/8 */
+    --accent-foreground: 33 53% 26%;
+
+    /* Error */
+    --destructive: 0 68% 42%;         /* #ba1a1a */
+    --destructive-foreground: 0 0% 100%;
+
+    /* No-Line Rule: borders are ghost-only */
+    --border: 33 20% 82%;             /* outline_variant at very low opacity */
+    --input: 210 17% 92%;             /* surface-container-highest */
+    --ring: 33 53% 26%;
+
+    /* Charts */
+    --chart-1: 33 53% 26%;            /* gold */
+    --chart-2: 129 74% 24%;           /* green */
+    --chart-3: 0 68% 42%;             /* error */
+    --chart-4: 197 37% 50%;
+    --chart-5: 280 40% 55%;
+
+    --radius: 0.75rem;
+
+    /* Sidebar — clean & soft */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 195 5% 20%;
+    --sidebar-primary: 33 53% 26%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 33 40% 96%;
+    --sidebar-accent-foreground: 33 53% 26%;
+    --sidebar-border: 210 17% 92%;
+    --sidebar-ring: 33 53% 26%;
+
+    /* Typography tokens */
+    --font-display: 'Manrope', sans-serif;
+    --font-body: 'Inter', sans-serif;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    color: hsl(var(--foreground));
+  }
+}
+
+/* === Quill editor overrides — light theme === */
+.ql-toolbar {
+  background-color: hsl(var(--muted)) !important;
+  border: none !important;
+  border-bottom: 1px solid hsl(var(--border)) !important;
+  border-radius: var(--radius) var(--radius) 0 0 !important;
+}
+.ql-container {
+  background-color: hsl(var(--input)) !important;
+  border: none !important;
+  border-radius: 0 0 var(--radius) var(--radius) !important;
+  color: hsl(var(--foreground)) !important;
+  font-family: var(--font-body) !important;
+}
+.ql-toolbar .ql-stroke { stroke: hsl(var(--muted-foreground)) !important; }
+.ql-toolbar .ql-fill  { fill:   hsl(var(--muted-foreground)) !important; }
+.ql-toolbar .ql-picker-label { color: hsl(var(--muted-foreground)) !important; }
+.ql-toolbar button:hover .ql-stroke,
+.ql-toolbar button.ql-active .ql-stroke { stroke: hsl(var(--primary)) !important; }
+.ql-toolbar button:hover .ql-fill,
+.ql-toolbar button.ql-active .ql-fill   { fill: hsl(var(--primary))   !important; }
+.ql-editor.ql-blank::before {
+  color: hsl(var(--muted-foreground)) !important;
+  font-style: normal !important;
+}
+
+/* === Sacred Ledger — utility classes === */
+
+/* Primary CTA gradient button */
+.btn-sacred {
+  background: linear-gradient(135deg, #715824 0%, #8c713a 100%);
+  color: #fff !important;
+  border: none;
+  border-radius: 0.75rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.1s ease;
+  display: inline-flex;
+  align-items: center;
+}
+.btn-sacred:hover { opacity: 0.88; transform: translateY(-1px); }
+
+/* Ledger list rows — alternating tones, no borders */
+.ledger-row-even { background-color: hsl(var(--card)); }
+.ledger-row-odd  { background-color: hsl(var(--muted)); }
+.ledger-row-even:hover,
+.ledger-row-odd:hover { background-color: hsl(33 40% 93% / 0.6); transition: background 0.15s ease; }
+
+/* Ambient "candle" shadow */
+.shadow-sacred {
+  box-shadow: 0 4px 24px 0 rgba(113, 88, 36, 0.08);
+}
+.shadow-sacred-lg {
+  box-shadow: 0 8px 40px 0 rgba(113, 88, 36, 0.12);
+}

@@ -1,0 +1,20 @@
+{
+  "name": "User",
+  "type": "object",
+  "properties": {
+    "role": {
+      "type": "string",
+      "enum": [
+        "admin",
+        "membro"
+      ],
+      "default": "membro",
+      "description": "Papel do usu\u00e1rio dentro da igreja"
+    },
+    "igreja_id": {
+      "type": "string",
+      "description": "ID da igreja \u00e0 qual o usu\u00e1rio pertence (multi-tenant)"
+    }
+  },
+  "required": []
+}

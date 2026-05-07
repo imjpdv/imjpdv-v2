@@ -1,0 +1,95 @@
+{
+  "name": "ContaBancaria",
+  "type": "object",
+  "properties": {
+    "nome_banco": {
+      "type": "string",
+      "description": "Nome do banco"
+    },
+    "agencia": {
+      "type": "string",
+      "description": "N\u00famero da ag\u00eancia"
+    },
+    "conta": {
+      "type": "string",
+      "description": "N\u00famero da conta"
+    },
+    "chave_pix": {
+      "type": "string",
+      "description": "Chave PIX"
+    },
+    "tipo_chave_pix": {
+      "type": "string",
+      "enum": [
+        "cpf",
+        "cnpj",
+        "email",
+        "telefone",
+        "aleatoria"
+      ],
+      "description": "Tipo da chave PIX"
+    },
+    "is_principal": {
+      "type": "boolean",
+      "default": false,
+      "description": "Se esta \u00e9 a conta principal"
+    },
+    "logo_url": {
+      "type": "string",
+      "description": "URL da logo do banco"
+    },
+    "link_pagamento": {
+      "type": "string",
+      "description": "Link para pagamento online"
+    },
+    "igreja_id": {
+      "type": "string",
+      "description": "ID da igreja (tenant)"
+    }
+  },
+  "required": [
+    "nome_banco",
+    "igreja_id"
+  ],
+  "rls": {
+    "create": {
+      "$and": [
+        {
+          "igreja_id": "{{user.igreja_id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "igreja_id": "{{user.igreja_id}}"
+    },
+    "update": {
+      "$and": [
+        {
+          "igreja_id": "{{user.igreja_id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$and": [
+        {
+          "igreja_id": "{{user.igreja_id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}
